@@ -1,13 +1,12 @@
 # dpll_solver.py
 def dpll_solver(clauses, assignment, strategy='freq'):
+    clauses, assignment = unit_propagate(clauses, assignment)
+    if clauses is None:
+        return False
     if not clauses:
         return True
-    if [] in clauses:
-        return False
 
-    clauses, assignment = unit_propagate(clauses, assignment)
     symbols = get_unassigned_symbols(clauses, assignment)
-
     if not symbols:
         return True
 
@@ -24,9 +23,13 @@ def unit_propagate(clauses, assignment):
     while changed:
         changed = False
         unit_literals = [c[0] for c in clauses if len(c) == 1]
+        if not unit_literals:
+            break
         for lit in unit_literals:
             assignment.append(lit)
             clauses = simplify(clauses, lit)
+            if [] in clauses:
+                return None, assignment
             changed = True
     return clauses, assignment
 
@@ -41,7 +44,4 @@ def choose_variable(symbols, strategy):
     import random
     if strategy == 'random':
         return random.choice(symbols)
-    elif strategy == 'freq':
-        # Dummy frequency-based heuristic
-        return symbols[0]
     return symbols[0]
