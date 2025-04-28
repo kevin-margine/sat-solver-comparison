@@ -1,18 +1,51 @@
 # SAT Solver Comparison
 
-This project implements and compares SAT solving algorithms: Resolution, Davis-Putnam (DP), and DPLL.
+This project implements and compares SAT solving algorithms:
+- Resolution
+- Davis-Putnam (DP)
+- Davis–Putnam–Logemann–Loveland (DPLL)
 
-## Contents
+## Project Structure
 
-- `scripts/`: Python implementations of the solvers
-- `data/`: Sample CNF test cases in DIMACS format
-- `results/`: Collected experiment results
+- `scripts/` – Python implementations of the solvers
+- `data/` – Sample CNF test cases (DIMACS format)
+- `enhanced_benchmark_runner.py` – Script to benchmark all solvers
+
+## How to Install
+
+1. Create a virtual environment (optional but recommended):
+   ```bash
+   python -m venv venv
+   source venv/Scripts/activate  # On Windows
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## How to Run
 
-Install dependencies:
-
+### Run a single solver:
 ```bash
-pip install -r requirements.txt
-python scripts/main.py --solver dpll --file data/sample.cnf --strategy freq
+python -m scripts.main --solver dpll --file data/sample_easy.cnf --strategy freq
+```
 
+### Run all benchmarks:
+```bash
+python enhanced_benchmark_runner.py
+```
+
+This will benchmark all solvers on all CNF files and display:
+- SAT/UNSAT result
+- Execution time
+- Memory usage
+
+## Requirements
+
+- Python 3.8 or newer
+- psutil (for memory measurement)
+
+## License
+
+This project is licensed under the MIT License.
