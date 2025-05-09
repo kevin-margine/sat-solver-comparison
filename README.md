@@ -49,3 +49,5 @@ This will benchmark all solvers on all CNF files and display:
 ## License
 
 This project is licensed under the MIT License.
+
+📦 **Note:** This repository has been archived to preserve the final submitted version of the SAT solver project for academic evaluation. No further changes will be made.
